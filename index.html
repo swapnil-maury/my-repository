@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="Snake and Ladder - Select the number of players">
+    <title>Snake and Ladder - Select Players</title>
+    <link rel="icon" href="snake and ladder image/snake and ladders.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: rgb(27, 26, 26);
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: fixed;
+        }
+        
+        .start-container {
+            background-color: #333;
+            border-radius: 15px;
+            padding: clamp(15px, 4vw, 30px);
+            max-width: min(90vw, 500px);
+            width: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-height: 95vh;
+            overflow-y: auto;
+            margin: 0 auto;
+        }
+        
+        .game-logo {
+            width: clamp(100px, 30vw, 150px);
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        
+        h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: clamp(15px, 4vw, 30px);
+            color: #4fa;
+            text-shadow: 0 0 10px rgba(0, 255, 128, 0.5);
+        }
+        
+        .selection-text {
+            font-size: clamp(16px, 4vw, 20px);
+            margin-bottom: clamp(15px, 4vw, 25px);
+        }
+        
+        .player-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: clamp(10px, 3vw, 20px);
+            margin-bottom: clamp(20px, 5vw, 30px);
+        }
+        
+        .player-btn {
+            padding: clamp(8px, 2vw, 12px) clamp(15px, 4vw, 25px);
+            font-size: clamp(14px, 3vw, 18px);
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: clamp(60px, 15vw, 80px);
+        }
+        
+        .player-btn:hover,
+        .player-btn.active {
+            background-color: #4fa;
+            color: #222;
+            transform: scale(1.05);
+        }
+        
+        .preview-area {
+            margin: clamp(15px, 4vw, 25px) 0;
+            display: flex;
+            justify-content: center;
+            gap: clamp(10px, 3vw, 20px);
+        }
+        
+        .player-token {
+            width: clamp(25px, 7vw, 40px);
+            height: clamp(25px, 7vw, 40px);
+            border-radius: 50%;
+        }
+        
+        #start-game {
+            padding: clamp(10px, 2.5vw, 15px) clamp(20px, 5vw, 30px);
+            font-size: clamp(16px, 3.5vw, 20px);
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: clamp(15px, 4vw, 25px);
+            width: clamp(150px, 60vw, 200px);
+        }
+        
+        #start-game:hover {
+            background-color: #3cb371;
+            transform: scale(1.05);
+        }
+        
+        #start-game:disabled {
+            background-color: #555;
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+        
+        /* Media queries for better responsiveness */
+        @media (max-width: 400px) {
+            .player-buttons {
+                gap: 8px;
+            }
+            
+            .player-btn {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            .preview-area {
+                gap: 8px;
+            }
+            
+            .player-token {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="start-container">
+        <img src="snake and ladder image/snake and ladders.png" alt="Game Logo" class="game-logo">
+        <h1>Snake and Ladder</h1>
+        
+        <p class="selection-text">Select number of players:</p>
+        
+        <div class="player-buttons">
+            <button class="player-btn" data-players="2">2</button>
+            <button class="player-btn" data-players="3">3</button>
+            <button class="player-btn" data-players="4">4</button>
+        </div>
+        
+        <p class="selection-text">Players:</p>
+        
+        <div class="preview-area">
+            <!-- Player tokens will be displayed here -->
+        </div>
+        
+        <button id="start-game" disabled>Start Game</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const playerButtons = document.querySelectorAll('.player-btn');
+            const previewArea = document.querySelector('.preview-area');
+            const startGameBtn = document.getElementById('start-game');
+            let selectedPlayers = 0;
+            
+            // Player colors
+            const playerColors = ['green', 'red', 'blue', 'yellow'];
+            
+            // Update preview based on player count
+            function updatePreview(count) {
+                previewArea.innerHTML = '';
+                
+                for (let i = 0; i < count; i++) {
+                    const token = document.createElement('div');
+                    token.classList.add('player-token');
+                    token.style.backgroundColor = playerColors[i];
+                    
+                    // Add shadow effect based on color
+                    switch(playerColors[i]) {
+                        case 'red':
+                            token.style.boxShadow = 'inset 0px 0px 6px 0px rgb(151, 7, 7)';
+                            break;
+                        case 'green':
+                            token.style.boxShadow = 'inset 0px 0px 6px 0px rgb(16, 165, 16)';
+                            break;
+                        case 'blue':
+                            token.style.boxShadow = 'inset 0px 0px 6px 0px rgb(0, 60, 255)';
+                            break;
+                        case 'yellow':
+                            token.style.boxShadow = 'inset 0px 0px 6px 0px rgb(180, 151, 0)';
+                            break;
+                    }
+                    
+                    previewArea.appendChild(token);
+                }
+            }
+            
+            // Handle player button clicks
+            playerButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    playerButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Update selected players
+                    selectedPlayers = parseInt(this.getAttribute('data-players'));
+                    
+                    // Update preview
+                    updatePreview(selectedPlayers);
+                    
+                    // Enable start button
+                    startGameBtn.disabled = false;
+                });
+            });
+            
+            // Handle start game button
+            startGameBtn.addEventListener('click', function() {
+                if (selectedPlayers > 0) {
+                    // Save player count to localStorage
+                    localStorage.setItem('numberOfPlayers', selectedPlayers);
+                    
+                    // Navigate to game page
+                    window.location.href = 'start.html';
+                }
+            });
+            
+            // Fix for orientation change
+            window.addEventListener('orientationchange', function() {
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html> 

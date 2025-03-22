@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="Snake and Ladder - A fun board game for 2-4 players">
+    <title>Snake and Ladder Game</title>
+    <link rel="icon" href="snake and ladder image/snake and ladders.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add styling for the turn indicator */
+        .turn-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="soundeffects">
+        <div class="ladder"></div>
+        <div class="snake"></div>
+        <div class="dicero"></div>
+        <div class="gameover"></div>
+    </div>
+
+    <div class="playerturn">
+        <span class="turn-indicator"></span>
+        Green's Turn
+    </div>
+    <div class="main">
+        <div class="anothermain">
+            <div class="another">
+                <div class="button" id="100"> </div>
+                <div class="button" id="99"> </div>
+                <div class="button" id="98"> </div>
+                <div class="button" id="97"> </div>
+                <div class="button" id="96"> </div>
+                <div class="button" id="95"> </div>
+                <div class="button" id="94"> </div>
+                <div class="button" id="93"> </div>
+                <div class="button" id="92"> </div>
+                <div class="button" id="91"> </div>
+                <div class="button" id="81"> </div>
+                <div class="button" id="82"> </div>
+                <div class="button" id="83"> </div>
+                <div class="button" id="84"> </div>
+                <div class="button" id="85"> </div>
+                <div class="button" id="86"> </div>
+                <div class="button" id="87"> </div>
+                <div class="button" id="88"> </div>
+                <div class="button" id="89"> </div>
+                <div class="button" id="90"> </div>
+                <div class="button" id="80"> </div>
+                <div class="button" id="79"> </div>
+                <div class="button" id="78"> </div>
+                <div class="button" id="77"> </div>
+                <div class="button" id="76"> </div>
+                <div class="button" id="75"> </div>
+                <div class="button" id="74"> </div>
+                <div class="button" id="73"> </div>
+                <div class="button" id="72"> </div>
+                <div class="button" id="71"> </div>
+                <div class="button" id="61"> </div>
+                <div class="button" id="62"> </div>
+                <div class="button" id="63"> </div>
+                <div class="button" id="64"> </div>
+                <div class="button" id="65"> </div>
+                <div class="button" id="66"> </div>
+                <div class="button" id="67"> </div>
+                <div class="button" id="68"> </div>
+                <div class="button" id="69"> </div>
+                <div class="button" id="70"> </div>
+                <div class="button" id="60"> </div>
+                <div class="button" id="59"> </div>
+                <div class="button" id="58"> </div>
+                <div class="button" id="57"> </div>
+                <div class="button" id="56"> </div>
+                <div class="button" id="55"> </div>
+                <div class="button" id="54"> </div>
+                <div class="button" id="53"> </div>
+                <div class="button" id="52"> </div>
+                <div class="button" id="51"> </div>
+                <div class="button" id="41"> </div>
+                <div class="button" id="42"> </div>
+                <div class="button" id="43"> </div>
+                <div class="button" id="44"> </div>
+                <div class="button" id="45"> </div>
+                <div class="button" id="46"> </div>
+                <div class="button" id="47"> </div>
+                <div class="button" id="48"> </div>
+                <div class="button" id="49"> </div>
+                <div class="button" id="50"> </div>
+                <div class="button" id="40"> </div>
+                <div class="button" id="39"> </div>
+                <div class="button" id="38"> </div>
+                <div class="button" id="37"> </div>
+                <div class="button" id="36"> </div>
+                <div class="button" id="35"> </div>
+                <div class="button" id="34"> </div>
+                <div class="button" id="33"> </div>
+                <div class="button" id="32"> </div>
+                <div class="button" id="31"> </div>
+                <div class="button" id="21"> </div>
+                <div class="button" id="22"> </div>
+                <div class="button" id="23"> </div>
+                <div class="button" id="24"> </div>
+                <div class="button" id="25"> </div>
+                <div class="button" id="26"> </div>
+                <div class="button" id="27"> </div>
+                <div class="button" id="28"> </div>
+                <div class="button" id="29"> </div>
+                <div class="button" id="30"> </div>
+                <div class="button" id="20"> </div>
+                <div class="button" id="19"> </div>
+                <div class="button" id="18"> </div>
+                <div class="button" id="17"> </div>
+                <div class="button" id="16"> </div>
+                <div class="button" id="15"> </div>
+                <div class="button" id="14"> </div>
+                <div class="button" id="13"> </div>
+                <div class="button" id="12"> </div>
+                <div class="button" id="11"> </div>
+                <div class="button" id="1">
+                    <!-- Player tokens will be added dynamically by JavaScript -->
+                </div>
+                <div class="button" id="2"> </div>
+                <div class="button" id="3"> </div>
+                <div class="button" id="4"> </div>
+                <div class="button" id="5"> </div>
+                <div class="button" id="6"> </div>
+                <div class="button" id="7"> </div>
+                <div class="button" id="8"> </div>
+                <div class="button" id="9"> </div>
+                <div class="button" id="10"> </div>
+            </div>
+
+        </div>
+        <div class="dice" role="button" aria-label="Roll dice">
+            <!-- Dice will display dynamically -->
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    
+    <script>
+        // Check if coming directly to index.html without selecting players
+        if (!localStorage.getItem('numberOfPlayers')) {
+            // Redirect to start page if no player count is set
+            window.location.href = 'index.html';
+        }
+        
+        // Add event listener for orientation change
+        window.addEventListener('orientationchange', function() {
+            // Small delay to allow orientation to complete
+            setTimeout(function() {
+                // Force layout recalculation
+                document.body.style.display = 'none';
+                document.body.offsetHeight; // Trigger reflow
+                document.body.style.display = '';
+            }, 300);
+        });
+    </script>
+</body>
+
+</html>
